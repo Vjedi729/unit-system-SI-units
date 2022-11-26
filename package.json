@@ -1,0 +1,22 @@
+{
+  "name": "@goggles/unit-system-si-units",
+  "version": "1.0.0",
+  "description": "A prebuilt set of the SI units (basic and derived) for use with my Unit System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vjedi729/unit-system-SI-units.git"
+  },
+  "author": "Vishal Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vjedi729/unit-system-SI-units/issues"
+  },
+  "homepage": "https://github.com/Vjedi729/unit-system-SI-units#readme",
+  "dependencies": {
+    "@goggles/unit-system": "^1.0.2"
+  }
+}
