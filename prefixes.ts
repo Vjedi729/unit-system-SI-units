@@ -1,4 +1,4 @@
-import Unit, { SimpleUnit, CombinationUnit, UnitShape } from "@goggles/unit-system"
+import Unit, { SimpleUnit, CombinationUnit, UnitShape, UnitNameConstruct } from "@goggles/unit-system"
 
 export interface SI_Prefix {name: string, abbreviation: string, exp: number}
 
@@ -28,8 +28,8 @@ export const SI_PREFIXES: Array<SI_Prefix> = [
     {name: "yocto", abbreviation: "y",	exp: -24},
 ]
 
-var decaUnit = new SimpleUnit('deka', new UnitShape("Amount"), 10, 'da');
-var siPrefixUnits: Array<Unit> = SI_PREFIXES.map( prefix => new CombinationUnit([[decaUnit, prefix.exp]], prefix.name, prefix.abbreviation))
+var decaUnit = new SimpleUnit(new UnitShape("Amount"), 10, new UnitNameConstruct('deka', 'da'));
+var siPrefixUnits: Array<Unit> = SI_PREFIXES.map( prefix => new CombinationUnit([[decaUnit, prefix.exp]], new UnitNameConstruct(prefix.name, prefix.abbreviation)))
 export default siPrefixUnits
 
 export function SIPrefixUnit(baseUnit:Unit, basePrefixName:string = ''): Array<Unit> {
@@ -47,9 +47,11 @@ export function SIPrefixUnit(baseUnit:Unit, basePrefixName:string = ''): Array<U
             (prefix.name == basePrefixName) ? 
                 baseUnit : 
                 new CombinationUnit(
-                    [[baseUnit, 1], [basePrefix, 1]],
-                    `${prefix.name}${baseName}`,
-                    baseAbbreviation ? `${prefix.abbreviation}${baseAbbreviation}` : undefined
+                    [[baseUnit, 1], [basePrefix, 1]], 
+                    new UnitNameConstruct(
+                        `${prefix.name}${baseName}`, 
+                        baseAbbreviation ? `${prefix.abbreviation}${baseAbbreviation}` : undefined
+                    )
                 )
         )
     }

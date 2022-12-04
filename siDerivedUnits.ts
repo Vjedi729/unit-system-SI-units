@@ -24,35 +24,35 @@ sievert 	    Sv 	    equivalent dose (of ionizing radiation) 	                  
 katal 	        kat     catalytic activity 	                                            mol/s 	                s−1 mol. 
 */
 
-import Unit, {CombinationUnit} from "@goggles/unit-system"
+import Unit, {CombinationUnit, UnitNameConstruct} from "@goggles/unit-system"
 import siBasisUnits from './siBasisUnits'
 
 // let units = siBasisUnits.reduce<{[key:string]: Unit}>((map, curr) => {map[curr.name] = curr; return map}, {})
 let u = siBasisUnits.reduce<{[key:string]: Unit}>((map, curr) => {map[curr.abbreviation || curr.name] = curr; return map}, {})
 
 export var siDerivedUnits = [
-    new CombinationUnit([[u.s, -1]                                   ], "hertz",            "Hz"    ),
-    new CombinationUnit([                                            ], "radian", 	        "rad"   ),
-    new CombinationUnit([                                            ], "steradian", 	    "sr"    ),
-    new CombinationUnit([[u.kg,  1], [u.m,  1], [u.s, -2]            ], "newton", 	        "N"     ),
-    new CombinationUnit([[u.kg,  1], [u.m, -1], [u.s, -2]            ], "pascal", 	        "Pa"    ),
-    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2],           ], "joule", 	        "J"     ),
-    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -3]            ], "watt", 	        "W"     ),
-    new CombinationUnit([[u.s,   1], [u.A,  1],                      ], "coulomb", 	        "C"     ),
-    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -3], [u.A, -1] ], "volt", 	        "V"     ),
-    new CombinationUnit([[u.kg, -1], [u.m, -2], [u.s,  4], [u.A,  2] ], "farad", 	        "F"     ),
-    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -3], [u.A, -2] ], "ohm", 	            "Ω"     ),
-    new CombinationUnit([[u.kg, -1], [u.m, -2], [u.s,  3], [u.A,  2] ], "siemens", 	        "S"     ),
-    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -1] ], "weber", 	        "Wb"    ),
-    new CombinationUnit([[u.kg,  1], [u.s, -2], [u.A, -1]            ], "tesla", 	        "T"     ),
-    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -2] ], "henry", 	        "H"     ),
-    new CombinationUnit([[u.K,   1],                                 ], "degree Celsius",	"°C"    ),
-    new CombinationUnit([[u.cd,  1],                                 ], "lumen", 	        "lm"    ),
-    new CombinationUnit([[u.cd,  1], [u.m, -2],                      ], "lux", 	            "lx"    ),
-    new CombinationUnit([[u.s,  -1],                                 ], "becquerel", 	    "Bq"    ),
-    new CombinationUnit([[u.m,   2], [u.s, -2],                      ], "gray", 	        "Gy"    ),
-    new CombinationUnit([[u.m,   2], [u.s, -2],                      ], "sievert", 	        "Sv"    ),
-    new CombinationUnit([[u.s,  -1], [u.mol,1],                      ], "katal", 	        "kat"   ),
+    new CombinationUnit([[u.s, -1]                                   ], new UnitNameConstruct("hertz",          "Hz" )),
+    new CombinationUnit([                                            ], new UnitNameConstruct("radian", 	    "rad")),
+    new CombinationUnit([                                            ], new UnitNameConstruct("steradian", 	    "sr" )),
+    new CombinationUnit([[u.kg,  1], [u.m,  1], [u.s, -2]            ], new UnitNameConstruct("newton", 	    "N"  )),
+    new CombinationUnit([[u.kg,  1], [u.m, -1], [u.s, -2]            ], new UnitNameConstruct("pascal", 	    "Pa" )),
+    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2],           ], new UnitNameConstruct("joule", 	        "J"  )),
+    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -3]            ], new UnitNameConstruct("watt", 	        "W"  )),
+    new CombinationUnit([[u.s,   1], [u.A,  1],                      ], new UnitNameConstruct("coulomb", 	    "C"  )),
+    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -3], [u.A, -1] ], new UnitNameConstruct("volt", 	        "V"  )),
+    new CombinationUnit([[u.kg, -1], [u.m, -2], [u.s,  4], [u.A,  2] ], new UnitNameConstruct("farad", 	        "F"  )),
+    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -3], [u.A, -2] ], new UnitNameConstruct("ohm", 	        "Ω"  )),
+    new CombinationUnit([[u.kg, -1], [u.m, -2], [u.s,  3], [u.A,  2] ], new UnitNameConstruct("siemens", 	    "S"  )),
+    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -1] ], new UnitNameConstruct("weber", 	        "Wb" )),
+    new CombinationUnit([[u.kg,  1], [u.s, -2], [u.A, -1]            ], new UnitNameConstruct("tesla", 	        "T"  )),
+    new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -2] ], new UnitNameConstruct("henry", 	        "H"  )),
+    new CombinationUnit([[u.K,   1],                                 ], new UnitNameConstruct("degree Celsius",	"°C" )),
+    new CombinationUnit([[u.cd,  1],                                 ], new UnitNameConstruct("lumen", 	        "lm" )),
+    new CombinationUnit([[u.cd,  1], [u.m, -2],                      ], new UnitNameConstruct("lux", 	        "lx" )),
+    new CombinationUnit([[u.s,  -1],                                 ], new UnitNameConstruct("becquerel", 	    "Bq" )),
+    new CombinationUnit([[u.m,   2], [u.s, -2],                      ], new UnitNameConstruct("gray", 	        "Gy" )),
+    new CombinationUnit([[u.m,   2], [u.s, -2],                      ], new UnitNameConstruct("sievert", 	    "Sv" )),
+    new CombinationUnit([[u.s,  -1], [u.mol,1],                      ], new UnitNameConstruct("katal", 	        "kat")),
 ]
 
 export default siDerivedUnits

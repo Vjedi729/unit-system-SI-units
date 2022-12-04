@@ -1,4 +1,4 @@
-import Unit, { SimpleUnit } from "@goggles/unit-system"
+import Unit, { SimpleUnit, UnitNameConstruct } from "@goggles/unit-system"
 import siBasisUnits from './siBasisUnits'
 import siDerivedUnits from './siDerivedUnits'
 import {SIPrefixUnit} from './prefixes'
@@ -15,9 +15,10 @@ siBaseUnits.forEach( (baseUnit) => {
     SIPrefixUnit(baseUnit, basePrefix).forEach(unit => {siUnits[unit.name] = unit} )
 })
 
-// Time
-siUnits['minute'] = new SimpleUnit('minute', siUnits.second.shape, 1/60, 'min')
-siUnits['hour'] = new SimpleUnit('hour', siUnits.second.shape, 1/(60*60), 'hr')
+// TODO: These time units are not SI Units and should be moved to a separate package
+// Based on: https://en.wikipedia.org/wiki/Non-SI_units_mentioned_in_the_SI  
+siUnits['minute'] = new SimpleUnit(siUnits.second.shape, 1/60, new UnitNameConstruct('minute', 'min'))
+siUnits['hour'] = new SimpleUnit(siUnits.second.shape, 1/(60*60), new UnitNameConstruct('hour', 'hr'))
 
 export var SIUnits = siUnits
 export default SIUnits
