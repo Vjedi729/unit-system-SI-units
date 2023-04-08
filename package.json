@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Vjedi729/unit-system-SI-units#readme",
   "dependencies": {
-    "@goggles/unit-system": "^1.2.1"
+    "@goggles/unit-system": "^1.3"
   }
 }

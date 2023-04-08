@@ -46,7 +46,7 @@ export var siDerivedUnits = [
     new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -1] ],             new UnitNameConstruct("weber", 	        "Wb" )),
     new CombinationUnit([[u.kg,  1], [u.s, -2], [u.A, -1]            ],             new UnitNameConstruct("tesla", 	        "T"  )),
     new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -2] ],             new UnitNameConstruct("henry", 	        "H"  )),
-    new CustomUnit(u.K.shape, (degC) => degC - 273.15, (kelvin) => kelvin + 273.15, new UnitNameConstruct("degree Celsius",	"°C" )),
+    new CustomUnit(u.K.shape, (degC) => degC - 273.15, (kelvin) => kelvin + 273.15, { hasAbsoluteZero: false, isLinear: true }, new UnitNameConstruct("degree Celsius",	"°C" )),
     new CombinationUnit([[u.cd,  1],                                 ],             new UnitNameConstruct("lumen", 	        "lm" )),
     new CombinationUnit([[u.cd,  1], [u.m, -2],                      ],             new UnitNameConstruct("lux", 	        "lx" )),
     new CombinationUnit([[u.s,  -1],                                 ],             new UnitNameConstruct("becquerel", 	    "Bq" )),
