@@ -40,7 +40,7 @@ export function SIPrefixUnit(baseUnit:Unit, basePrefixName:string = ''): Array<U
     } else {
         let basePrefix: Unit = tryfindBasePrefix;
         let baseName = baseUnit.name.slice(basePrefix.name.length)
-        let baseAbbreviation = basePrefix.abbreviation ? baseUnit.abbreviation?.slice(basePrefix.abbreviation.length-1) : undefined
+        let baseAbbreviation = (basePrefix.abbreviation!=undefined) ? baseUnit.abbreviation?.slice(basePrefix.abbreviation.length) : undefined
         
         return siPrefixUnits.map( 
             (prefix) => 
