@@ -29,25 +29,25 @@ export const SI_PREFIXES: Array<SI_Prefix> = [
 ]
 
 var decaUnit = new SimpleUnit(new UnitShape("Amount"), 10, new UnitNameConstruct('deka', 'da'));
-var siPrefixUnits: Array<Unit> = SI_PREFIXES.map( prefix => new CombinationUnit([[decaUnit, prefix.exp]], new UnitNameConstruct(prefix.name, prefix.abbreviation)))
+export var siPrefixUnits: Array<Unit> = SI_PREFIXES.map( prefix => new CombinationUnit([[decaUnit, prefix.exp]], new UnitNameConstruct(prefix.name, prefix.abbreviation)))
 export default siPrefixUnits
 
 export function SIPrefixUnit(baseUnit:Unit, basePrefixName:string = ''): Array<Unit> {
 
-    let tryfindPrefix = siPrefixUnits.find(prefix => prefix.name == basePrefixName)
-    if(tryfindPrefix == undefined) {
+    let tryfindBasePrefix = siPrefixUnits.find(prefix => prefix.name == basePrefixName)
+    if(tryfindBasePrefix == undefined) {
         throw new RangeError("SIPrefixedUnits() :: Prefix name must be a valid SI unit prefix")
     } else {
-        let basePrefix: Unit = tryfindPrefix;
+        let basePrefix: Unit = tryfindBasePrefix;
         let baseName = baseUnit.name.slice(basePrefix.name.length)
         let baseAbbreviation = basePrefix.abbreviation ? baseUnit.abbreviation?.slice(basePrefix.abbreviation.length) : undefined
         
-        return SI_PREFIXES.map( 
+        return siPrefixUnits.map( 
             (prefix) => 
             (prefix.name == basePrefixName) ? 
                 baseUnit : 
                 new CombinationUnit(
-                    [[baseUnit, 1], [basePrefix, 1]], 
+                    [[baseUnit, 1], [prefix, 1]], 
                     new UnitNameConstruct(
                         `${prefix.name}${baseName}`, 
                         baseAbbreviation ? `${prefix.abbreviation}${baseAbbreviation}` : undefined
