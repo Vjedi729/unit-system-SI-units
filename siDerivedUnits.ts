@@ -24,11 +24,17 @@ sievert 	    Sv 	    equivalent dose (of ionizing radiation) 	                  
 katal 	        kat     catalytic activity 	                                            mol/s 	                s−1 mol. 
 */
 
-import Unit, {CombinationUnit, CustomUnit, UnitNameConstruct, UnitShape} from "@goggles/unit-system"
+import Unit, {CombinationUnit, CustomUnit, UnitNameConstruct} from "@goggles/unit-system"
 import siBasisUnits from './siBasisUnits'
 
 // let units = siBasisUnits.reduce<{[key:string]: Unit}>((map, curr) => {map[curr.name] = curr; return map}, {})
-let u = siBasisUnits.reduce<{[key:string]: Unit}>((map, curr) => {map[curr.abbreviation || curr.name] = curr; return map}, {})
+let u = siBasisUnits.reduce<{[key:string]: Unit}>((map, curr) => {
+    if (curr.abbreviation) map[curr.abbreviation] = curr 
+    return map
+}, {})
+export const siBasisUnitsByAbbreviation = u;
+
+const k2cOffset = 273.15 // kelvinToCelciusOffset
 
 export var siDerivedUnits = [
     new CombinationUnit([[u.s, -1]                                   ],             new UnitNameConstruct("hertz",          "Hz" )),
@@ -46,7 +52,7 @@ export var siDerivedUnits = [
     new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -1] ],             new UnitNameConstruct("weber", 	        "Wb" )),
     new CombinationUnit([[u.kg,  1], [u.s, -2], [u.A, -1]            ],             new UnitNameConstruct("tesla", 	        "T"  )),
     new CombinationUnit([[u.kg,  1], [u.m,  2], [u.s, -2], [u.A, -2] ],             new UnitNameConstruct("henry", 	        "H"  )),
-    new CustomUnit(u.K.shape, (degC) => degC - 273.15, (kelvin) => kelvin + 273.15, { hasAbsoluteZero: false, isLinear: true }, new UnitNameConstruct("degree Celsius",	"°C" )),
+    new CustomUnit(u.K.shape, (degC) => degC - k2cOffset, (kelvin) => kelvin + k2cOffset, { hasAbsoluteZero: false, isLinear: true }, new UnitNameConstruct("degree Celsius",	"°C" )),
     new CombinationUnit([[u.cd,  1],                                 ],             new UnitNameConstruct("lumen", 	        "lm" )),
     new CombinationUnit([[u.cd,  1], [u.m, -2],                      ],             new UnitNameConstruct("lux", 	        "lx" )),
     new CombinationUnit([[u.s,  -1],                                 ],             new UnitNameConstruct("becquerel", 	    "Bq" )),

@@ -6,13 +6,17 @@ import {SIPrefixUnit} from './prefixes'
 let siUnits: {[key: string]: Unit} = {}
 
 let siBaseUnits = siBasisUnits.concat(siDerivedUnits)
+
+const unprefixedSIUnits = ['mole', 'degree Celsius']
+const SIUnitBasePrefixes = { 'kilogram': 'kilo' }
+
 siBaseUnits.forEach( (baseUnit) => {
-    if (baseUnit.name in ['mole']) return
+    if (unprefixedSIUnits.find(name => name == baseUnit.name) != undefined) { 
+        siUnits[baseUnit.name] = baseUnit; 
+        return; 
+    }
 
-    let basePrefix: string|undefined = undefined;
-    if (baseUnit.name == 'kilogram') basePrefix = 'kilo';
-
-    SIPrefixUnit(baseUnit, basePrefix).forEach(unit => {siUnits[unit.name] = unit} )
+    SIPrefixUnit(baseUnit, SIUnitBasePrefixes[baseUnit.name]).forEach(unit => {siUnits[unit.name] = unit} )
 })
 
 // TODO: These time units are not SI Units and should be moved to a separate package

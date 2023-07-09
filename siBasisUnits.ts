@@ -7,7 +7,7 @@ const SI_BASIS = [
     {name:'kilogram',   abbreviation:'kg',  shape: new UnitShape("Mass")},
     {name:'ampere',     abbreviation:'A',   shape: new UnitShape("ElectricCurrent")},
     {name:'candela',    abbreviation:'cd',  shape: new UnitShape("LuminousIntensity")},
-    {name:'mole',       abbreviation:'mol', shape: new UnitShape("Amount")},
+    {name:'mole',       abbreviation:'mol', shape: new UnitShape(/* "Amount" */)},
 ]
 
 // export var NoUnit = new BaseSIUnit("None",  new UnitShape({}), '') // No longer needed -> Equivalent to combination unit with all powers as zero.

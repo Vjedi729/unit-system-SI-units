@@ -1,6 +1,6 @@
 {
   "name": "@goggles/unit-system-si-units",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "A prebuilt set of the SI units (basic and derived) for use with my Unit System",
   "main": "index.js",
   "scripts": {
